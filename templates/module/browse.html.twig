@@ -12,13 +12,12 @@
 			<thead>
 				<tr>
 					<th>Id</th>
-					<th>Name</th>
-					<th>Serial number</th>
+					<th>Nom</th>
 					<th>Description</th>
-					<th>Active</th>
-					<th>Temperature</th>
-					<th>Uptime</th>
-					<th>DataSent</th>
+					<th>Actif</th>
+					<th>Température</th>
+					<th>Durée de fonctionnement (en minutes)</th>
+					<th>Données envoyées</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -27,7 +26,7 @@
 						<td>{{ module.id }}</td>
 						<td>{{ module.name }}</td>
 						<td>{{ module.description }}</td>
-						<td>{{ module.active ? 'Yes' : 'No' }}</td>
+						<td>{{ module.active ? 'Oui' : 'Non' }}</td>
 						<td>{{ module.temperature }}</td>
 						<td>{{ module.uptime }}</td>
 						<td>{{ module.dataSent |default('NC') }}</td>
