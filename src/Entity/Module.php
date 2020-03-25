@@ -24,11 +24,6 @@ class Module
     private $name;
 
     /**
-     * @ORM\Column(type="string",length=255, nullable=true)
-     */
-    private $serialNumber;
-
-    /**
      * @ORM\Column(type="text", nullable=true)
      */
     private $description;
@@ -102,18 +97,6 @@ class Module
     public function setName(string $name): self
     {
         $this->name = $name;
-
-        return $this;
-    }
-
-    public function getSerialNumber(): ?string
-    {
-        return $this->serialNumber;
-    }
-
-    public function setSerialNumber(?string $serialNumber): self
-    {
-        $this->serialNumber = $serialNumber;
 
         return $this;
     }

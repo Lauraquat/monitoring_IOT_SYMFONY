@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Module;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -13,19 +14,19 @@ class ModuleType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('serialNumber')
             ->add('description')
             ->add('active')
             ->add('temperature')
             ->add('uptime')
             ->add('dataSent',
-/*                 [
+                  IntegerType::class,
+                 [
                     'attr' => [
                         'min' => 0,
                         'step' => 1,
                     ]
                 ]
- */            )
+             )
             ->add('displayActive')
             ->add('displayTemperature')
             ->add('displayUptime')
