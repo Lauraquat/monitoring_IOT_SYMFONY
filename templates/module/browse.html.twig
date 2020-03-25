@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des modules
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+
+		<h1>Liste des modules</h1>
+
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Name</th>
+					<th>Serial number</th>
+					<th>Description</th>
+					<th>Active</th>
+					<th>Temperature</th>
+					<th>Uptime</th>
+					<th>DataSent</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for module in modules %}
+					<tr>
+						<td>{{ module.id }}</td>
+						<td>{{ module.name }}</td>
+						<td>{{ module.serialNumber }}</td>
+						<td>{{ module.description }}</td>
+						<td>{{ module.active ? 'Yes' : 'No' }}</td>
+						<td>{{ module.temperature }}</td>
+						<td>{{ module.uptime }}</td>
+						<td>{{ module.dataSent |default('NC') }}</td>
+						<td>
+							<button>
+								<a href="{{ path('module_read', {'id': module.id}) }}">Voir</a>
+							</button>
+						</td>
+						<td>
+							<button>
+								<a href="{{ path('module_edit', {'id': module.id}) }}">Modifier</a>
+							</button>
+						</td>
+					</tr>
+				{% else %}
+					<tr>
+						<td colspan="13">Aucun module n'est enregistré</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+
+		<button>
+			<a href="{{ path('module_add') }}">Créer un nouveau module</a>
+		</button>
+	</div>
+{% endblock %}

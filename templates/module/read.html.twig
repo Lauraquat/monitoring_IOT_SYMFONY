@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détail du module
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+
+		<h1>Module :{{ module.name }}</h1>
+
+		<table class="table">
+			<tbody>
+				<tr>
+					<th>Id</th>
+					<td>{{ module.id }}</td>
+				</tr>
+				<tr>
+					<th>Name</th>
+					<td>{{ module.name }}</td>
+				</tr>
+				<tr>
+					<th>Serial number</th>
+					<td>{{ module.serialNumber }}</td>
+				</tr>
+				<tr>
+					<th>Description</th>
+					<td>{{ module.description }}</td>
+				</tr>
+				<tr>
+					<th>Active</th>
+					<td>{{ module.active ? 'Yes' : 'No' }}</td>
+				</tr>
+				<tr>
+					<th>Temperature</th>
+					<td>{{ module.temperature }}</td>
+				</tr>
+				<tr>
+					<th>Uptime</th>
+					<td>{{ module.uptime }}</td>
+				</tr>
+				<tr>
+					<th>DataSent</th>
+					<td>{{ module.dataSent }}</td>
+				</tr>
+				<tr>
+					<th>DisplayActive</th>
+					<td>{{ module.displayActive ? 'Yes' : 'No' }}</td>
+				</tr>
+				<tr>
+					<th>DisplayTemperature</th>
+					<td>{{ module.displayTemperature ? 'Yes' : 'No' }}</td>
+				</tr>
+				<tr>
+					<th>DisplayUptime</th>
+					<td>{{ module.displayUptime ? 'Yes' : 'No' }}</td>
+				</tr>
+				<tr>
+					<th>DisplayDataSent</th>
+					<td>{{ module.displayDataSent ? 'Yes' : 'No' }}</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<button>
+			<a href="{{ path('module_edit', {'id': module.id}) }}">Modifier</a>
+		</button>
+		<button>
+			<a href="{{ path('module_browse') }}">Retour à la liste</a>
+		</button>
+
+		<div class="mt-3">
+			{{ include('module/_delete_form.html.twig') }}
+		</div>
+
+	</div>
+{% endblock %}
