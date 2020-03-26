@@ -11,12 +11,12 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/module")
+ * @Route("/module", name="module_")
  */
 class ModuleController extends AbstractController
 {
     /**
-     * @Route("/", name="module_browse", methods={"GET"})
+     * @Route("/", name="browse", methods={"GET"})
      */
     public function browse(ModuleRepository $moduleRepository): Response
     {
@@ -26,7 +26,7 @@ class ModuleController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="module_read", methods={"GET"}, requirements={"id": "\d+"})
+     * @Route("/{id}", name="read", methods={"GET"}, requirements={"id": "\d+"})
      */
     public function read(Module $module): Response
     {
@@ -36,7 +36,7 @@ class ModuleController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="module_edit", methods={"GET","POST"}, requirements={"id": "\d+"})
+     * @Route("/{id}/edit", name="edit", methods={"GET","POST"}, requirements={"id": "\d+"})
      */
     public function edit(Request $request, Module $module): Response
     {
@@ -57,7 +57,7 @@ class ModuleController extends AbstractController
 
 
     /**
-     * @Route("/add", name="module_add", methods={"GET","POST"})
+     * @Route("/add", name="add", methods={"GET","POST"})
      */
     public function add(Request $request): Response
     {
@@ -81,7 +81,7 @@ class ModuleController extends AbstractController
 
 
     /**
-     * @Route("/{id}/delete", name="module_delete", methods={"DELETE"}, requirements={"id": "\d+"})
+     * @Route("/{id}/delete", name="delete", methods={"DELETE"}, requirements={"id": "\d+"})
      */
     public function delete(Request $request, Module $module): Response
     {

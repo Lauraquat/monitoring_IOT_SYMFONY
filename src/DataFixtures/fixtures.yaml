@@ -1,0 +1,4 @@
+App\Entity\Type:
+    type_{1..5}:
+        name: '<typeName()>' 
+        code: '<typeCode()>'

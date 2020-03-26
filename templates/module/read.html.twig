@@ -57,15 +57,18 @@
 			</tbody>
 		</table>
 
-		<button>
-			<a href="{{ path('module_edit', {'id': module.id}) }}">Modifier</a>
-		</button>
-		<button>
-			<a href="{{ path('module_browse') }}">Retour à la liste</a>
-		</button>
+		<div class="row">
+			<button class="mr-3">
+				<a href="{{ path('module_edit', {'id': module.id}) }}">Modifier</a>
+			</button>
 
-		<div class="mt-3">
 			{{ include('module/_delete_form.html.twig') }}
+		</div>
+
+		<div class="row">
+			<button class="mt-3">
+				<a href="{{ path('module_browse') }}">Retour à la liste</a>
+			</button>
 		</div>
 
 	</div>

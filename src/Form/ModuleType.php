@@ -19,7 +19,7 @@ class ModuleType extends AbstractType
             ->add('temperature')
             ->add('uptime')
             ->add('dataSent',
-                  IntegerType::class,
+                  null,
                  [
                     'attr' => [
                         'min' => 0,

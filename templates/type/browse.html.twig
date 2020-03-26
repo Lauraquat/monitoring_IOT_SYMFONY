@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des types{% endblock %}
+
+{% block body %}
+	<div class="container">
+
+		<h1>Liste des types</h1>
+
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Nom</th>
+					<th>Code</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for type in types %}
+					<tr>
+						<td>{{ type.id }}</td>
+						<td>{{ type.name }}</td>
+						<td>{{ type.code }}</td>
+					</tr>
+				{% else %}
+					<tr>
+						<td colspan="13">Aucun type n'est enregistré</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+
+		<button>
+			<a href="{{ path('home') }}">Retour à l'accueil</a>
+		</button>
+	</div>
+{% endblock %}

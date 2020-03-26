@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Historique{% endblock %}
+
+{% block body %}
+	<div class="container">
+
+		<h1>Détail de l'historique</h1>
+
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Date</th>
+					<th>Propriété</th>
+   					<th>Ancienne valeur</th>
+					<th>Nouvelle valeur</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for history in histories %}
+					<tr>
+						<td>{{ history.id }}</td>
+						<td>{{ history.date }}</td>
+						<td>{{ history.property }}</td>
+   						<td>{{ history.oldValue }}</td>
+						<td>{{ history.newValue }}</td>
+					</tr>
+				{% else %}
+					<tr>
+						<td colspan="13">Aucun historique n'est enregistré</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+
+		<button>
+			<a href="{{ path('home') }}">Retour à l'accueil</a>
+		</button>
+	</div>
+{% endblock %}
