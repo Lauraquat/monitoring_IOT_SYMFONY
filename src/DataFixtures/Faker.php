@@ -7,10 +7,11 @@ use \Faker\Provider\Base as BaseProvider;
 class TypeProvider extends BaseProvider{
 
     protected static $typeName = [
-        'Radiateur',
-        'Lampe',
-        'Télévision',
-        'Volet électrique',
+        'Chauffage',
+        'Eclairage',
+        'Appareil',
+        'Volet',
+        'prise',
         
     ];
 
@@ -19,6 +20,7 @@ class TypeProvider extends BaseProvider{
         'LIGHT',
         'APPLIANCE',
         'SHUTTER',
+        'PLUG',
     ];
 
     public static function typeName(){

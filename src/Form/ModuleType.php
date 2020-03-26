@@ -4,7 +4,6 @@ namespace App\Form;
 
 use App\Entity\Module;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -15,9 +14,23 @@ class ModuleType extends AbstractType
         $builder
             ->add('name')
             ->add('description')
+            ->add('type', null,
+            [
+                // permet de convertir type en string (sans mettre de __toString dans l'entity)
+               'choice_label' => 'name',
+               'placeholder' => "",
+           ])
             ->add('active')
             ->add('temperature')
-            ->add('uptime')
+            ->add('uptime',
+            null,
+           [
+              'attr' => [
+                  'min' => 0,
+                  'step' => 1,
+              ]
+          ]
+       )
             ->add('dataSent',
                   null,
                  [

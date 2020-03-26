@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -27,10 +29,14 @@ class Type
     private $code;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Module", inversedBy="moduleType")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\OneToMany(targetEntity="App\Entity\Module", mappedBy="types")
      */
-    private $moduleType;
+    private $modules;
+
+    public function __construct()
+    {
+        $this->modules = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -61,14 +67,33 @@ class Type
         return $this;
     }
 
-    public function getModuleType(): ?Module
+    /**
+     * @return Collection|Module[]
+     */
+    public function getModules(): Collection
     {
-        return $this->moduleType;
+        return $this->modules;
     }
 
-    public function setModuleType(?Module $moduleType): self
+    public function addModule(Module $module): self
     {
-        $this->moduleType = $moduleType;
+        if (!$this->modules->contains($module)) {
+            $this->modules[] = $module;
+            $module->setType($this);
+        }
+
+        return $this;
+    }
+
+    public function removeModule(Module $module): self
+    {
+        if ($this->modules->contains($module)) {
+            $this->modules->removeElement($module);
+            // set the owning side to null (unless already changed)
+            if ($module->getType() === $this) {
+                $module->setType(null);
+            }
+        }
 
         return $this;
     }

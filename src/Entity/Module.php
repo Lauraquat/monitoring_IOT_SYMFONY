@@ -69,18 +69,18 @@ class Module
     private $displayDataSent;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Type", mappedBy="moduleType")
-     */
-    private $moduleType;
-
-    /**
      * @ORM\OneToMany(targetEntity="App\Entity\History", mappedBy="moduleHistory")
      */
     private $histories;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Type", inversedBy="modules")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $type;
+
     public function __construct()
     {
-        $this->moduleType = new ArrayCollection();
         $this->histories = new ArrayCollection();
     }
 
@@ -210,37 +210,6 @@ class Module
     }
 
     /**
-     * @return Collection|Type[]
-     */
-    public function getModuleType(): Collection
-    {
-        return $this->moduleType;
-    }
-
-    public function addModuleType(Type $moduleType): self
-    {
-        if (!$this->moduleType->contains($moduleType)) {
-            $this->moduleType[] = $moduleType;
-            $moduleType->setModuleType($this);
-        }
-
-        return $this;
-    }
-
-    public function removeModuleType(Type $moduleType): self
-    {
-        if ($this->moduleType->contains($moduleType)) {
-            $this->moduleType->removeElement($moduleType);
-            // set the owning side to null (unless already changed)
-            if ($moduleType->getModuleType() === $this) {
-                $moduleType->setModuleType(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
      * @return Collection|History[]
      */
     public function getHistories(): Collection
@@ -267,6 +236,18 @@ class Module
                 $history->setModuleHistory(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getType(): ?Type
+    {
+        return $this->type;
+    }
+
+    public function setType(?Type $type): self
+    {
+        $this->type = $type;
 
         return $this;
     }
