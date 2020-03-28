@@ -21,12 +21,21 @@ class ModuleType extends AbstractType
                'placeholder' => "",
            ])
             ->add('active')
-            ->add('temperature')
+            ->add('temperature',
+            null,
+           [
+              'attr' => [
+                  'min' => 0,
+                  'step' => 1,
+              ]
+          ]
+       )
             ->add('uptime',
             null,
            [
               'attr' => [
                   'min' => 0,
+                  'max' => 45,
                   'step' => 1,
               ]
           ]

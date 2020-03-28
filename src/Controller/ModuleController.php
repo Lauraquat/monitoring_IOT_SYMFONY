@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\History;
 use App\Entity\Module;
 use App\Form\ModuleType;
 use App\Repository\ModuleRepository;
@@ -62,12 +63,14 @@ class ModuleController extends AbstractController
     public function add(Request $request): Response
     {
         $module = new Module();
+        $history= new History();
         $form = $this->createForm(ModuleType::class, $module);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($module);
+            $entityManager->persist($history);
             $entityManager->flush();
 
             return $this->redirectToRoute('module_browse');
