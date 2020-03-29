@@ -22,20 +22,20 @@
 							<h4 class="card-title" style="font-size: 1rem">{{ active.description }}</h4>
 							<div class="row">
 								<p class="card-text mr-4">
-									{% if active.displayTemperature %}
+									{% if active.temperature and active.displayTemperature %}
 										<i class="fas fa-thermometer-three-quarters"></i>
 										{{ active.temperature }} °C
 									{% endif %}
 								</p>
 
 								<p class="card-text mr-4">
-									{% if active.displayUptime %}
+									{% if active.uptime and active.displayUptime %}
 										<i class="far fa-clock"></i>
 										{{ active.uptime }} min
 									{% endif %}
 								</p>
 								<p class="card-text mr-4">
-									{% if active.displayDataSent %}
+									{% if active.dataSent and active.displayDataSent %}
 										<i class="fas fa-database"></i>
 										{{ active.dataSent }}
 									{% endif %}
