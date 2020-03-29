@@ -8,83 +8,67 @@
 
 		<h1>Etat des modules</h1>
 
-		<h2>Modules actifs</h2>
+		{% if module %}
 
-		<div class="row">
+			<h2>Modules actifs</h2>
 
-			{% for active in actives %}
+			<div class="row">
 
-				<div class="card text-white bg-success mb-3 mr-3 col-3" style="max-width: 20rem;">
-					<div class="card-header" style="font-size: 1.75rem">{{ active.name }}</div>
-					<div class="card-body">
-						<h4 class="card-title" style="font-size: 1rem">{{ active.description }}</h4>
-						<div class="row">
-							<p class="card-text mr-5">
-								{% if active.displayTemperature %}
-									<i class="fas fa-thermometer-three-quarters"></i>
-									{{ active.temperature }}
-								{% endif %}
-							</p>
+				{% for active in actives %}
 
-							<p class="card-text mr-5">
-								{% if active.displayUptime %}
-									<i class="far fa-clock"></i>
-									{{ active.uptime }}
-								{% endif %}
-							</p>
-							<p class="card-text mr-5">
-								{% if active.displayDataSent %}
-									<i class="fas fa-database"></i>
-									{{ active.dataSent }}
-								{% endif %}
-							</p>
+					<div class="card text-white bg-success mb-3 mr-3 col-3" style="max-width: 20rem;">
+						<div class="card-header" style="font-size: 1.75rem">{{ active.name }}</div>
+						<div class="card-body">
+							<h4 class="card-title" style="font-size: 1rem">{{ active.description }}</h4>
+							<div class="row">
+								<p class="card-text mr-4">
+									{% if active.displayTemperature %}
+										<i class="fas fa-thermometer-three-quarters"></i>
+										{{ active.temperature }} °C
+									{% endif %}
+								</p>
 
+								<p class="card-text mr-4">
+									{% if active.displayUptime %}
+										<i class="far fa-clock"></i>
+										{{ active.uptime }} min
+									{% endif %}
+								</p>
+								<p class="card-text mr-4">
+									{% if active.displayDataSent %}
+										<i class="fas fa-database"></i>
+										{{ active.dataSent }}
+									{% endif %}
+								</p>
+
+							</div>
 						</div>
 					</div>
-				</div>
 
-			{% endfor %}
-		</div>
+				{% endfor %}
+			</div>
 
-		<h2>Modules inactifs</h2>
+			<h2>Modules inactifs</h2>
 
-		<div class="row">
-			{% for inactive in inactives %}
-				<div class="card text-white bg-danger mb-3 mr-3 col-3" style="max-width: 20rem;">
-					<div class="card-header" style="font-size: 1.75rem">{{ inactive.name }}</div>
-					<div class="card-body">
-						<h4 class="card-title" style="font-size: 1rem">{{ inactive.description }}</h4>
-						<div class="row">
-							<p class="card-text mr-5">
-								{% if inactive.displayTemperature %}
-									<i class="fas fa-thermometer-three-quarters"></i>
-									{{ inactive.temperature }}
-								{% endif %}
-							</p>
-
-							<p class="card-text mr-5">
-								{% if inactive.displayUptime %}
-									<i class="far fa-clock"></i>
-									{{ inactive.uptime }}
-								{% endif %}
-							</p>
-							<p class="card-text mr-5">
-								{% if inactive.displayDataSent %}
-									<i class="fas fa-database"></i>
-									{{ inactive.dataSent }}
-								{% endif %}
-							</p>
-
+			<div class="row">
+				{% for inactive in inactives %}
+					<div class="card text-white bg-danger mb-3 mr-3 col-3" style="max-width: 20rem;">
+						<div class="card-header" style="font-size: 1.75rem">{{ inactive.name }}</div>
+						<div class="card-body">
+							<h4 class="card-title" style="font-size: 1rem">{{ inactive.description }}</h4>
 						</div>
 					</div>
-				</div>
+
+				{% endfor %}
+
 
 			{% else %}
 				<tr>
 					<td colspan="13">Aucun module n'est enregistré</td>
 				</tr>
 
-			
-		{% endfor %}
-	</div>
-{% endblock %}
+			{% endif %}
+
+		</div>
+
+	{% endblock %}

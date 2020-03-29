@@ -75,16 +75,16 @@ class CreateFixturesCommand extends Command
 
         $typeHeater = $this->createTypeFixture("Chauffage", "HEATER");
         $typeLight = $this->createTypeFixture("Eclairage", "LIGHT");
-        $typePlug = $this->createTypeFixture("Prise", "PLUG");
+        $typeAppliance = $this->createTypeFixture("Appareil", "APPLIANCE");
 
 
 
-        $this->createModuleFixture("Chauffage Salon", $typeHeater, true, true, 30, true, 19, true, 214, true);
+        $this->createModuleFixture("Chauffage Salon", $typeHeater, true, true, 30, true, 19, true, 50, true);
         $this->createModuleFixture("Chauffage Cuisine", $typeHeater, false, true, null, false, null, false, null, false);
         $this->createModuleFixture("Lumière salon", $typeLight, true, true, 45, true, false, false, false, false);
-        $this->createModuleFixture("Lumière cuisine", $typeLight, false, true, null, false, null, false, null, false);
-        $this->createModuleFixture("TV salon", $typePlug, true, true, 60, true, false, false, 1462, true);
-        $this->createModuleFixture("TV cuisine", $typePlug, false, true, null, false, null, false, null, false);
+        $this->createModuleFixture("Lumière cuisine", $typeLight, false, true, null, false, false, false, null, false);
+        $this->createModuleFixture("TV salon", $typeAppliance, true, true, 60, true, false, false, 150, true);
+        $this->createModuleFixture("TV cuisine", $typeAppliance, false, true, null, false, null, false, null, false);
 
 
         $io->success('La fixture a été exécutée');
