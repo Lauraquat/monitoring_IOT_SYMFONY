@@ -4,18 +4,14 @@
 {% endblock %}
 
 {% block body %}
-	<div class="container">
+	<div class="container-fluid m-auto">
 
 		<h1>Module :{{ module.name }}</h1>
 
 		<table class="table">
 			<tbody>
 				<tr>
-					<th>Id</th>
-					<td>{{ module.id }}</td>
-				</tr>
-				<tr>
-					<th>Name</th>
+					<th>Nom</th>
 					<td>{{ module.name }}</td>
 				</tr>
 				<tr>
@@ -23,42 +19,54 @@
 					<td>{{ module.description }}</td>
 				</tr>
 				<tr>
-					<th>Active</th>
-					<td>{{ module.active ? 'Yes' : 'No' }}</td>
+					<th>Actif</th>
+					<td>{{ module.active ? 'Oui' : 'Non' }}</td>
 				</tr>
 				<tr>
-					<th>Temperature</th>
-					<td>{{ module.temperature }}</td>
+					<th>Température</th>
+					<td>{% if module.displayTemperature %} {{ module.temperature }} {% else %} - {% endif %}</td>
+ 				</tr>
+				<tr>
+					<th>Durée de fonctionnement</th>
+					<td>{% if module.displayUptime %} {{ module.uptime }} {% else %} - {% endif %}</td>
 				</tr>
 				<tr>
-					<th>Uptime</th>
-					<td>{{ module.uptime }}</td>
-				</tr>
-				<tr>
-					<th>DataSent</th>
-					<td>{{ module.dataSent }}</td>
-				</tr>
-				<tr>
-					<th>DisplayActive</th>
-					<td>{{ module.displayActive ? 'Yes' : 'No' }}</td>
-				</tr>
-				<tr>
-					<th>DisplayTemperature</th>
-					<td>{{ module.displayTemperature ? 'Yes' : 'No' }}</td>
-				</tr>
-				<tr>
-					<th>DisplayUptime</th>
-					<td>{{ module.displayUptime ? 'Yes' : 'No' }}</td>
-				</tr>
-				<tr>
-					<th>DisplayDataSent</th>
-					<td>{{ module.displayDataSent ? 'Yes' : 'No' }}</td>
+					<th>Données envoyées</th>
+					<td>{% if module.displayDataSent %} {{ module.dataSent }} {% else %} - {% endif %}</td>
 				</tr>
 			</tbody>
 		</table>
 
+<h2>historiques </h2>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Date</th>
+					<th>Propriété</th>
+   					<th>Ancienne valeur</th>
+					<th>Nouvelle valeur</th>
+				</tr>
+			</thead>
+		
+			<tbody>
+					{% for history in module.histories %}
+					<tr>
+						<td>{{ history.date|format_datetime('short', 'short', locale='fr') }}</td>
+						<td>{{ history.property }}</td>
+   						<td>{{ history.oldValue }}</td>
+						<td>{{ history.newValue }}</td>
+					</tr>
+				{% else %}
+					<tr>
+						<td colspan="13">Aucun historique n'est enregistré</td>
+					</tr>
+				{% endfor %}
+
+			</tbody>
+		</table>
+
 		<div class="row">
-			<button class="mr-3">
+			<button class="ml-3 mr-3">
 				<a href="{{ path('module_edit', {'id': module.id}) }}">Modifier</a>
 			</button>
 
@@ -66,7 +74,7 @@
 		</div>
 
 		<div class="row">
-			<button class="mt-3">
+			<button class="ml-3 mt-3 mb-5">
 				<a href="{{ path('module_browse') }}">Retour à la liste</a>
 			</button>
 		</div>

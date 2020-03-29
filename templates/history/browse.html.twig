@@ -3,14 +3,14 @@
 {% block title %}Historique{% endblock %}
 
 {% block body %}
-	<div class="container">
+	<div class="container-fluid m-auto">
 
 		<h1>Détail de l'historique</h1>
 
 		<table class="table">
 			<thead>
 				<tr>
-					<th>Id</th>
+					<th>Module</th>
 					<th>Date</th>
 					<th>Propriété</th>
    					<th>Ancienne valeur</th>
@@ -20,8 +20,8 @@
 			<tbody>
 				{% for history in histories %}
 					<tr>
-						<td>{{ history.id }}</td>
-						<td>{{ history.date }}</td>
+						<td>{{ history.moduleHistory.name }}</td>
+						<td>{{ history.date|date('d/m/Y H:i:s') }}</td>
 						<td>{{ history.property }}</td>
    						<td>{{ history.oldValue }}</td>
 						<td>{{ history.newValue }}</td>
@@ -34,7 +34,7 @@
 			</tbody>
 		</table>
 
-		<button>
+		<button class="mb-5">
 			<a href="{{ path('home') }}">Retour à l'accueil</a>
 		</button>
 	</div>

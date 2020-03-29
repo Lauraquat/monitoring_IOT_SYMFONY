@@ -3,14 +3,13 @@
 {% block title %}Liste des types{% endblock %}
 
 {% block body %}
-	<div class="container">
+	<div class="container-fluid m-auto">
 
 		<h1>Liste des types</h1>
 
 		<table class="table">
 			<thead>
 				<tr>
-					<th>Id</th>
 					<th>Nom</th>
 					<th>Code</th>
 				</tr>
@@ -18,7 +17,6 @@
 			<tbody>
 				{% for type in types %}
 					<tr>
-						<td>{{ type.id }}</td>
 						<td>{{ type.name }}</td>
 						<td>{{ type.code }}</td>
 					</tr>

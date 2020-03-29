@@ -17,7 +17,7 @@ class History
     private $id;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="datetime")
      */
     private $date;
 
@@ -37,9 +37,14 @@ class History
     private $newValue;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Module", inversedBy="histories")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Module", inversedBy="histories", cascade={"persist"})
      */
     private $moduleHistory;
+
+    public function __construct()
+    {
+        $this->date = new \DateTime();
+    }
 
     public function getId(): ?int
     {

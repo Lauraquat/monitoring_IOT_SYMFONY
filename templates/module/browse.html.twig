@@ -4,14 +4,13 @@
 {% endblock %}
 
 {% block body %}
-	<div class="container">
+	<div class="container-fluid m-auto">
 
 		<h1>Liste des modules</h1>
 
 		<table class="table">
 			<thead>
 				<tr>
-					<th>Id</th>
 					<th>Nom</th>
 					<th>Description</th>
 					<th>Type</th>
@@ -19,19 +18,38 @@
 					<th>Température</th>
 					<th>Durée de fonctionnement (en minutes)</th>
 					<th>Données envoyées</th>
-				</tr>
+{# 					<th></th>
+					<th></th>
+ #}				</tr>
 			</thead>
 			<tbody>
 				{% for module in modules %}
 					<tr>
-						<td>{{ module.id }}</td>
 						<td>{{ module.name }}</td>
 						<td>{{ module.description }}</td>
 						<td>{{ module.type.name }}</td>
 						<td>{{ module.active ? 'Oui' : 'Non' }}</td>
-						<td>{{ module.temperature }}</td>
-						<td>{{ module.uptime }}</td>
-						<td>{{ module.dataSent |default('NC') }}</td>
+						<td>
+							{% if module.displayTemperature %}
+								{{ module.temperature }}
+							{% else %}
+								-
+							{% endif %}
+						</td>
+						<td>
+							{% if module.displayUptime %}
+								{{ module.uptime }}
+							{% else %}
+								-
+							{% endif %}
+						</td>
+						<td>
+							{% if module.displayDataSent %}
+								{{ module.dataSent }}
+							{% else %}
+								-
+							{% endif %}
+						</td>
 						<td>
 							<button>
 								<a href="{{ path('module_read', {'id': module.id}) }}">Voir</a>
@@ -51,19 +69,15 @@
 			</tbody>
 		</table>
 
-		<div class="row">
-			<button>
-				<a href="{{ path('module_add') }}">Créer un nouveau module</a>
-			</button>
-
-		</div>
+		<button>
+			<a href="{{ path('module_add') }}">Créer un nouveau module</a>
+		</button>
 
 		<div class="row">
-			<button class="mt-3">
+			<button class="ml-3 mt-3">
 				<a href="{{ path('home') }}">Retour à l'accueil</a>
 			</button>
 		</div>
-
 
 	</div>
 {% endblock %}

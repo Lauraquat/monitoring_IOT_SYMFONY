@@ -5,9 +5,14 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\MappingDoctrine\ORM\Mapping\UniqueConstraint;
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ModuleRepository")
+ * 
+ * @ORM\Table(name="module",uniqueConstraints={
+ * @ORM\UniqueConstraint(name="name_unique", columns={"name"})})
  */
 class Module
 {
@@ -69,7 +74,7 @@ class Module
     private $displayDataSent;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\History", mappedBy="moduleHistory")
+     * @ORM\OneToMany(targetEntity="App\Entity\History", mappedBy="moduleHistory", cascade={"persist"})
      */
     private $histories;
 
@@ -96,6 +101,7 @@ class Module
 
     public function setName(string $name): self
     {
+        $this->createHistory('Nom', $this->name, $name);
         $this->name = $name;
 
         return $this;
@@ -108,6 +114,7 @@ class Module
 
     public function setDescription(?string $description): self
     {
+        $this->createHistory('Description', $this->description, $description);
         $this->description = $description;
 
         return $this;
@@ -120,6 +127,7 @@ class Module
 
     public function setActive(bool $active): self
     {
+        $this->createHistory('Actif', (int)$this->active, (int)$active);
         $this->active = $active;
 
         return $this;
@@ -132,6 +140,7 @@ class Module
 
     public function setTemperature(?int $temperature): self
     {
+        $this->createHistory('Température', (int)$this->temperature, (int)$temperature);
         $this->temperature = $temperature;
 
         return $this;
@@ -144,6 +153,7 @@ class Module
 
     public function setUptime(?int $uptime): self
     {
+        $this->createHistory('Durée de fonctionnement', (int)$this->uptime, (int)$uptime);
         $this->uptime = $uptime;
 
         return $this;
@@ -156,6 +166,7 @@ class Module
 
     public function setDataSent(?int $dataSent): self
     {
+        $this->createHistory('Données envoyées', (int)$this->dataSent, (int)$dataSent);
         $this->dataSent = $dataSent;
 
         return $this;
@@ -248,6 +259,18 @@ class Module
     public function setType(?Type $type): self
     {
         $this->type = $type;
+
+        return $this;
+    }
+
+    public function createHistory($property, $oldValue, $newValue)
+    {
+        $history = new History();
+        $history->setProperty($property);
+        $history->setOldValue($oldValue);
+        $history->setNewValue($newValue);
+
+        $this->addHistory($history);
 
         return $this;
     }

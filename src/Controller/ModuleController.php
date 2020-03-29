@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\History;
 use App\Entity\Module;
 use App\Form\ModuleType;
+use App\Repository\HistoryRepository;
 use App\Repository\ModuleRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -47,7 +48,7 @@ class ModuleController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('module_browse');
+            return $this->redirectToRoute('home');
         }
 
         return $this->render('module/edit.html.twig', [
@@ -63,14 +64,12 @@ class ModuleController extends AbstractController
     public function add(Request $request): Response
     {
         $module = new Module();
-        $history= new History();
         $form = $this->createForm(ModuleType::class, $module);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($module);
-            $entityManager->persist($history);
             $entityManager->flush();
 
             return $this->redirectToRoute('module_browse');

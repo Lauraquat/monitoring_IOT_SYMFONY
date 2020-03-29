@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\HistoryRepository;
+use App\Repository\ModuleRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -14,10 +15,11 @@ class HistoryController extends AbstractController
     /**
      * @Route("/", name="browse")
      */
-    public function browse(HistoryRepository $historyRepository)
+    public function browse(HistoryRepository $historyRepository, ModuleRepository $moduleRepository)
     {
         return $this->render('history/browse.html.twig', [
             'histories' => $historyRepository->findAll(),
+            'module' => $moduleRepository->findAll(),
         ]);
     }
 }

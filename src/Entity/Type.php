@@ -5,9 +5,14 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\MappingDoctrine\ORM\Mapping\UniqueConstraint;
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TypeRepository")
+ *
+ * @ORM\Table(name="type",uniqueConstraints={
+ * @ORM\UniqueConstraint(name="code_unique", columns={"code"})})
  */
 class Type
 {
@@ -29,7 +34,7 @@ class Type
     private $code;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Module", mappedBy="types")
+     * @ORM\OneToMany(targetEntity="App\Entity\Module", mappedBy="type", cascade={"persist", "remove"})
      */
     private $modules;
 
