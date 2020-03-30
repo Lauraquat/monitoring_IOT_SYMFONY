@@ -26,12 +26,14 @@ class CreateFixturesCommand extends Command
     {
         $this
             ->setDescription('Commande pour lancer les fixtures')
+            // Ajout de l'option clear pour vider la BDD avant de créer une nouvelle fixture en BDD
             ->addOption('clear', null, InputOption::VALUE_NONE, 'Pour vider la BDD avant de lancer une fixture')
         ;
     }
 
     public function createModuleFixture($name, $type, $active, $displayActive, $uptime, $displayUptime, $temperatue, $displayTemperature, $dataSent, $displayDataSent)
     {
+        // Définition des propriétés d'un objet Module
         $module = new Module();
         $module->setName($name);
         $module->setType($type);
@@ -45,12 +47,14 @@ class CreateFixturesCommand extends Command
         $module->setDataSent($dataSent);
         $module->setDisplayDataSent($displayDataSent);
 
+        // On envoie les données en BDD
         $this->em->persist($module);
         $this->em->flush();
     }
 
     public function createTypeFixture($name, $code)
     {
+        // Définition des propriétés d'un objet Type
         $type = new Type();
         $type->setName($name);
         $type->setCode($code);
@@ -64,7 +68,7 @@ class CreateFixturesCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        
+        // A l'exécution de la commande, si l'option "clear" existe, on purge la BDD
         if ($input->getOption('clear') == true) {
             $purger = new ORMPurger($this->em);
             $purger->purge();
@@ -73,17 +77,17 @@ class CreateFixturesCommand extends Command
 
         $io = new SymfonyStyle($input, $output);
 
+        // Création des différents Types
         $typeHeater = $this->createTypeFixture("Chauffage", "HEATER");
         $typeLight = $this->createTypeFixture("Eclairage", "LIGHT");
         $typeAppliance = $this->createTypeFixture("Appareil", "APPLIANCE");
 
-
-
+        // Création des différents modules reprenant les types créés ci dessus
         $this->createModuleFixture("Chauffage Salon", $typeHeater, true, true, 30, true, 19, true, 50, true);
         $this->createModuleFixture("Chauffage Cuisine", $typeHeater, false, true, null, false, null, false, null, false);
-        $this->createModuleFixture("Lumière salon", $typeLight, true, true, 45, true, false, false, false, false);
-        $this->createModuleFixture("Lumière cuisine", $typeLight, false, true, null, false, false, false, null, false);
-        $this->createModuleFixture("TV salon", $typeAppliance, true, true, 60, true, false, false, 150, true);
+        $this->createModuleFixture("Lumière salon", $typeLight, true, true, 45, true, null, false, false, false);
+        $this->createModuleFixture("Lumière cuisine", $typeLight, false, true, null, false, null, false, null, false);
+        $this->createModuleFixture("TV salon", $typeAppliance, true, true, 60, true, null, false, 150, true);
         $this->createModuleFixture("TV cuisine", $typeAppliance, false, true, null, false, null, false, null, false);
 
 

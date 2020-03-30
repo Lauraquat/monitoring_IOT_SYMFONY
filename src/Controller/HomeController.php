@@ -14,6 +14,7 @@ class HomeController extends AbstractController
      */
     public function home(ModuleRepository $moduleRepository)
     {
+        // Affichage des modules selon leur activité
         return $this->render('home.html.twig',[
             'actives' => $moduleRepository->findByActive(true),
             'inactives' =>$moduleRepository->findByActive(false),

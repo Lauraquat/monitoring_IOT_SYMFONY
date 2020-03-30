@@ -17,6 +17,7 @@ class HistoryController extends AbstractController
      */
     public function browse(HistoryRepository $historyRepository, ModuleRepository $moduleRepository)
     {
+        // Affichage de l'historique de tous les modules
         return $this->render('history/browse.html.twig', [
             'histories' => $historyRepository->findAll(),
             'module' => $moduleRepository->findAll(),

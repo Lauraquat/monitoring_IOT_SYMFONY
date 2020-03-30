@@ -16,6 +16,7 @@ class TypeController extends AbstractController
      */
     public function browse(TypeRepository $typeRepository)
     {
+        // Affichage des types
         return $this->render('type/browse.html.twig', [
             'types' => $typeRepository->findAll(),
         ]);

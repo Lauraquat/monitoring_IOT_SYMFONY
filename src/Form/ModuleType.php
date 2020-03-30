@@ -4,9 +4,7 @@ namespace App\Form;
 
 use App\Entity\Module;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -73,25 +71,33 @@ class ModuleType extends AbstractType
                     ]
                 ]
             )
-            ->add('displayActive',
-            null,
-            [
+            ->add('displayActive', ChoiceType::class, [
                 'label' => "Affichage de l'activité",
+                'choices' => [
+                    'Oui' => true,
+                    'Non' => false,
+                ]
             ])
-            ->add('displayTemperature',
-            null,
-            [
-                'label' => "Affichage de la température",
+            ->add('displayTemperature', ChoiceType::class, [
+                'label' => "Affichage de la température (pour un type chauffage)",
+                'choices' => [
+                    'Non' => false,
+                    'Oui' => true,
+                ]
             ])
-            ->add('displayUptime',
-            null,
-            [
+            ->add('displayUptime', ChoiceType::class, [
                 'label' => "Affichage de la durée de fonctionnement",
+                'choices' => [
+                    'Oui' => true,
+                    'Non' => false,
+                ]
             ])
-            ->add('displayDataSent',
-            null,
-            [
+            ->add('displayDataSent', ChoiceType::class, [
                 'label' => "Affichage des données envoyées",
+                'choices' => [
+                    'Oui' => true,
+                    'Non' => false,
+                ]
             ]);
     }
 

@@ -1,10 +1,13 @@
-composer install
+Pour lancer ce monitoring (projet Symfony) :
 
-modifier le .env pour mettre les bon credentials de bdd
+* Dézipper le projet dans le dossier concerné
 
-bin/console doctrine:database:create
-bin/console doctrine:schema:update --force
+* Lancer composer install
+* Modifier le .env pour mettre les bons identifiants de bdd
 
-bin/console app:create-fixture
+* Créer la BDD => bin/console doctrine:database:create
+* Mettre à jour la BDD => bin/console doctrine:schema:update --force
 
-symfony serve -d
+* Lancer la commande de création de la fixture => bin/console app:create-fixture
+
+* Lancer le serveur => symfony serve -d

@@ -5,8 +5,6 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\MappingDoctrine\ORM\Mapping\UniqueConstraint;
-
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ModuleRepository")
@@ -74,7 +72,7 @@ class Module
     private $displayDataSent;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\History", mappedBy="moduleHistory", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="App\Entity\History", mappedBy="moduleHistory", cascade={"persist"}, orphanRemoval=true)
      */
     private $histories;
 
